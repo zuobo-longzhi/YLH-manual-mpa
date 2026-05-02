@@ -160,3 +160,10 @@ export function getSearchText(pageId) {
   const data = pageId === 'overview' ? { manualIntro } : allManualData[pageId]
   return `${meta.title || ''} ${meta.description || ''} ${JSON.stringify(data || {})}`
 }
+
+export const searchIndex = navItems.reduce((acc, item) => {
+  const meta = pageMeta[item.id] || {}
+  const data = item.id === 'overview' ? { manualIntro } : allManualData[item.id]
+  acc[item.id] = `${item.label} ${meta.title || ''} ${meta.description || ''} ${JSON.stringify(data || {})}`.toLowerCase()
+  return acc
+}, {})

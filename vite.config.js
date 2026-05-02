@@ -8,6 +8,8 @@ export default defineConfig({
   base: '/YLH-manual-mpa/',
   plugins: [vue()],
   build: {
+    chunkSizeWarningLimit: 500,
+    reportCompressedSize: false,
     rollupOptions: {
       input: {
         index: resolvePath('./index.html'),

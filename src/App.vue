@@ -24,13 +24,14 @@ import SalaryPage from './pages/SalaryPage.vue'
 import OffboardingPage from './pages/OffboardingPage.vue'
 import FinancePage from './pages/FinancePage.vue'
 import ClosingPage from './pages/ClosingPage.vue'
+import NotFoundPage from './pages/NotFoundPage.vue'
 
 const props = defineProps({
   page: { type: String, default: 'overview' },
 })
 
 const keyword = ref('')
-const isDark = ref(sessionStorage.getItem('manual-theme') === 'dark')
+const isDark = ref(localStorage.getItem('manual-theme') === 'dark')
 
 const pages = {
   overview: OverviewPage,
@@ -45,14 +46,14 @@ const pages = {
   closing: ClosingPage,
 }
 
-const currentPageComponent = computed(() => pages[props.page] || OverviewPage)
+const currentPageComponent = computed(() => pages[props.page] || NotFoundPage)
 
 function toggleDark() {
   isDark.value = !isDark.value
-  sessionStorage.setItem('manual-theme', isDark.value ? 'dark' : 'light')
+  localStorage.setItem('manual-theme', isDark.value ? 'dark' : 'light')
 }
 
-const PDF_URL = `${import.meta.env.BASE_URL}files/雅利恒员工手册 -第三版（2022.8.22）.pdf`
+const PDF_URL = `${import.meta.env.BASE_URL}files/ylh-employee-manual-v3.pdf`
 
 function printPage() {
   const link = document.createElement('a')

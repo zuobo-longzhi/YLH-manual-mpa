@@ -40,7 +40,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { getSearchText, navItems } from '../../data/manual.js'
+import { navItems, searchIndex } from '../../data/manual.js'
 import logoSrc from '../../assets/ylh.png' 
 
 const props = defineProps({
@@ -54,7 +54,7 @@ defineEmits(['update:keyword', 'close'])
 const matchedNavItems = computed(() => {
   const q = props.keyword.trim().toLowerCase()
   if (!q) return navItems
-  return navItems.filter((item) => `${item.label} ${getSearchText(item.id)}`.toLowerCase().includes(q))
+  return navItems.filter((item) => searchIndex[item.id].includes(q))
 })
 
 const matchedIds = computed(() => matchedNavItems.value.map((item) => item.id))
